@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>職務経歴書 作成フォーム</title>
   <style>
-    body { font-family: sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    h2 { color: #2c3e50; font-size: 20px; border-bottom: 2px solid #3498db; padding-bottom: 8px; margin-top: 0; }
-    .form-group { margin-bottom: 20px; }
-    label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px; }
-    input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
-    textarea { height: 100px; resize: vertical; }
-    button { width: 100%; background: #3498db; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    button:hover { background: #2980b9; }
-    .note { font-size: 12px; color: #7f8c8d; margin-top: 15px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 15px; color: #333; }
+    .container { max-width: 680px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    h2 { color: #1a365d; font-size: 22px; border-bottom: 3px solid #3182ce; padding-bottom: 10px; margin-top: 0; text-align: center; }
+    .section-title { background: #ebf8ff; color: #2b6cb0; padding: 8px 12px; border-left: 4px solid #3182ce; font-size: 16px; font-weight: bold; margin: 25px 0 15px 0; }
+    .form-group { margin-bottom: 18px; }
+    .form-row { display: flex; gap: 15px; }
+    .form-row .form-group { flex: 1; }
+    label { font-weight: bold; display: block; margin-bottom: 6px; font-size: 14px; }
+    .req { color: #e53e3e; margin-left: 4px; }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
+    input:focus, textarea:focus, select:focus { border-color: #3182ce; background: #fff; outline: none; }
+    textarea { height: 90px; resize: vertical; }
+    button { width: 100%; background: #3182ce; color: white; border: none; padding: 14px; font-size: 18px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: background 0.2s; }
+    button:hover { background: #2b6cb0; }
+    .note { font-size: 12px; color: #718096; margin-top: 15px; text-align: center; }
   </style>
 </head>
 <body>
@@ -22,43 +27,137 @@
 <div class="container">
   <h2>職務経歴書 作成フォーム</h2>
   <form id="resumeForm">
+
+    <!-- 基本情報 -->
+    <div class="section-title">基本情報</div>
     <div class="form-group">
-      <label>氏名（漢字フルネーム） *</label>
+      <label>氏名（漢字フルネーム）<span class="req">*</span></label>
       <input type="text" name="氏名（漢字フルネーム）" placeholder="山田 太郎" required>
     </div>
 
+    <!-- 職歴 1社目 -->
+    <div class="section-title">職歴（1社目）</div>
     <div class="form-group">
-      <label>1社目：会社名 *</label>
+      <label>1社目：会社名<span class="req">*</span></label>
       <input type="text" name="1社目：会社名" placeholder="株式会社〇〇" required>
     </div>
-
+    <div class="form-row">
+      <div class="form-group">
+        <label>入社年月<span class="req">*</span></label>
+        <input type="text" name="1社目：入社年月" placeholder="2020/04" required>
+      </div>
+      <div class="form-group">
+        <label>退社年月（在職中は空欄）</label>
+        <input type="text" name="1社目：退社年月" placeholder="2023/03">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>雇用形態</label>
+        <select name="1社目：雇用形態">
+          <option value="正社員">正社員</option>
+          <option value="契約社員">契約社員</option>
+          <option value="派遣社員">派遣社員</option>
+          <option value="アルバイト・パート">アルバイト・パート</option>
+          <option value="業務委託">業務委託</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>事業内容</label>
+        <input type="text" name="1社目：事業内容" placeholder="例：飲食店の運営、ITシステム開発">
+      </div>
+    </div>
     <div class="form-group">
-      <label>1社目：入社年月 *</label>
-      <input type="text" name="1社目：入社年月" placeholder="2022/04" required>
+      <label>担当業務内容</label>
+      <textarea name="1社目：担当業務内容" placeholder="例：接客、調理、シフト管理、新人教育..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>実績・取り組み</label>
+      <textarea name="1社目：実績・取り組み" placeholder="例：店舗売上目標を120%達成、業務効率化の提案..."></textarea>
     </div>
 
+    <!-- 職歴 2社目（任意） -->
+    <div class="section-title">職歴（2社目・任意）</div>
     <div class="form-group">
-      <label>1社目：退社年月（在職中の場合は空欄）</label>
-      <input type="text" name="1社目：退社年月" placeholder="2024/03">
+      <label>2社目：会社名</label>
+      <input type="text" name="2社目：会社名" placeholder="株式会社△△">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>入社年月</label>
+        <input type="text" name="2社目：入社年月" placeholder="2023/04">
+      </div>
+      <div class="form-group">
+        <label>退社年月</label>
+        <input type="text" name="2社目：退社年月" placeholder="現在">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>雇用形態</label>
+        <select name="2社目：雇用形態">
+          <option value="正社員">正社員</option>
+          <option value="契約社員">契約社員</option>
+          <option value="派遣社員">派遣社員</option>
+          <option value="アルバイト・パート">アルバイト・パート</option>
+          <option value="業務委託">業務委託</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>事業内容</label>
+        <input type="text" name="2社目：事業内容">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>担当業務内容</label>
+      <textarea name="2社目：担当業務内容"></textarea>
+    </div>
+    <div class="form-group">
+      <label>実績・取り組み</label>
+      <textarea name="2社目：実績・取り組み"></textarea>
     </div>
 
+    <!-- 資格・免許 -->
+    <div class="section-title">取得資格・免許</div>
+    <div class="form-row">
+      <div class="form-group" style="flex: 1;">
+        <label>取得年月①</label>
+        <input type="text" name="取得年月①" placeholder="2021/05">
+      </div>
+      <div class="form-group" style="flex: 2;">
+        <label>取得資格・免許①</label>
+        <input type="text" name="取得資格・免許①" placeholder="普通自動車第一種運転免許">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex: 1;">
+        <label>取得年月②</label>
+        <input type="text" name="取得年月②" placeholder="2022/10">
+      </div>
+      <div class="form-group" style="flex: 2;">
+        <label>取得資格・免許②</label>
+        <input type="text" name="取得資格・免許②" placeholder="日商簿記検定2級">
+      </div>
+    </div>
+
+    <!-- 能力・自己PR -->
+    <div class="section-title">生かせる能力・自己PR</div>
     <div class="form-group">
       <label>生かせる能力・スキル</label>
-      <textarea name="生かせる能力・スキル" placeholder="例：営業経験3年、PC基本操作..."></textarea>
+      <textarea name="生かせる能力・スキル" placeholder="例：コミュニケーション能力、PC基本操作（Word, Excel）、マネジメント経験..."></textarea>
     </div>
-
     <div class="form-group">
       <label>自己PR</label>
-      <textarea name="自己PR" placeholder="これまでの実績やアピールポイント..."></textarea>
+      <textarea name="自己PR" placeholder="これまでの経験で培った強みや、仕事に対する姿勢・意欲などをご記入ください。"></textarea>
     </div>
 
-    <button type="submit" id="submitBtn">送信して自動生成する</button>
+    <button type="submit" id="submitBtn">送信して職務経歴書を自動生成する</button>
   </form>
   <p class="note">※送信後、自動的に職務経歴書ドキュメントが生成されます。</p>
 </div>
 
 <script>
-  // GASの「ウェブアプリURL」をここに貼り付けます
+  // GASのウェブアプリURL（設定済み）
   const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxVRmPdHe0C6-3wcNmOYOvlVTKjEW-uU4EiL1XBASH5Ipbtn0YaXlP1umrBNMXY7RYX/exec";
 
   document.getElementById('resumeForm').addEventListener('submit', function(e) {
@@ -79,15 +178,15 @@
     })
     .then(res => res.json())
     .then(res => {
-      alert('送信が完了しました！職務経歴書が生成されます。');
+      alert('送信が完了しました！職務経歴書ドキュメントが生成されます。');
       this.reset();
-      btn.innerText = '送信して自動生成する';
+      btn.innerText = '送信して職務経歴書を自動生成する';
       btn.disabled = false;
     })
     .catch(err => {
       alert('送信完了（処理が開始されました）');
       this.reset();
-      btn.innerText = '送信して自動生成する';
+      btn.innerText = '送信して職務経歴書を自動生成する';
       btn.disabled = false;
     });
   });
