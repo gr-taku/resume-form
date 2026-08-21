@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>職務経歴書 作成フォーム</title>
+  <style>
+    body { font-family: sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; font-size: 20px; border-bottom: 2px solid #3498db; padding-bottom: 8px; margin-top: 0; }
+    .form-group { margin-bottom: 20px; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px; }
+    input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+    textarea { height: 100px; resize: vertical; }
+    button { width: 100%; background: #3498db; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #2980b9; }
+    .note { font-size: 12px; color: #7f8c8d; margin-top: 15px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>職務経歴書 作成フォーム</h2>
+  <form id="resumeForm">
+    <div class="form-group">
+      <label>氏名（漢字フルネーム） *</label>
+      <input type="text" name="氏名（漢字フルネーム）" placeholder="山田 太郎" required>
+    </div>
+
+    <div class="form-group">
+      <label>1社目：会社名 *</label>
+      <input type="text" name="1社目：会社名" placeholder="株式会社〇〇" required>
+    </div>
+
+    <div class="form-group">
+      <label>1社目：入社年月 *</label>
+      <input type="text" name="1社目：入社年月" placeholder="2022/04" required>
+    </div>
+
+    <div class="form-group">
+      <label>1社目：退社年月（在職中の場合は空欄）</label>
+      <input type="text" name="1社目：退社年月" placeholder="2024/03">
+    </div>
+
+    <div class="form-group">
+      <label>生かせる能力・スキル</label>
+      <textarea name="生かせる能力・スキル" placeholder="例：営業経験3年、PC基本操作..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>自己PR</label>
+      <textarea name="自己PR" placeholder="これまでの実績やアピールポイント..."></textarea>
+    </div>
+
+    <button type="submit" id="submitBtn">送信して自動生成する</button>
+  </form>
+  <p class="note">※送信後、自動的に職務経歴書ドキュメントが生成されます。</p>
+</div>
+
+<script>
+  // GASの「ウェブアプリURL」をここに貼り付けます
+  const GAS_WEB_APP_URL = "ここにGASのウェブアプリURLを貼る";
+
+  document.getElementById('resumeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.innerText = '送信中...';
+    btn.disabled = true;
+
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = [value];
+    });
+
+    fetch(GAS_WEB_APP_URL, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+      alert('送信が完了しました！職務経歴書が生成されます。');
+      this.reset();
+      btn.innerText = '送信して自動生成する';
+      btn.disabled = false;
+    })
+    .catch(err => {
+      alert('送信完了（処理が開始されました）');
+      this.reset();
+      btn.innerText = '送信して自動生成する';
+      btn.disabled = false;
+    });
+  });
+</script>
+
+</body>
+</html>
